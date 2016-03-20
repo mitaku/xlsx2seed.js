@@ -56,13 +56,14 @@ for (const sheet of program.subdivide.map((sheet_name) => sheet_name_subdivide_r
 }
 
 console.log(`output-directory: ${program.output}`);
+console.time(`total`);
 for (const file of files) {
   const file_path = path.isAbsolute(file) ? file : path.join(program.input, file);
   console.log(`${file}:`);
-  console.log(`  full-path:   ${file_path}`);
-  console.log(`  parse-start: ${new Date()}`);
+  console.log(`  full-path: ${file_path}`);
+  console.time(`  parsetime`);
   const xlsx2seed = new Xlsx2Seed(file_path);
-  console.log(`  parse-end:   ${new Date()}`);
+  console.timeEnd(`  parsetime`);
 
   console.log(`  sheets:`);
   for (const sheet_name of xlsx2seed.sheet_names) {
@@ -80,10 +81,10 @@ for (const file of files) {
     const {cut_prefix, cut_postfix} = subdivide_rules[sheet_name] || {cut_prefix: false, cut_postfix: false};
     if (cut_prefix !== false || cut_postfix !== false)
       console.log(`      subdivide: {cut_prefix: ${Number(cut_prefix)}, cut_postfix: ${Number(cut_postfix)}}`);
-    console.log(`      get-start: ${new Date()}`);
+    console.time(`      writetime`);
     const data = sheet.data;
-    // console.log(`      get-end:   ${new Date()}`);
     data.write_as_single_or_separated_yaml_sync(program.output, cut_prefix, cut_postfix);
-    console.log(`      write-end: ${new Date()}`);
+    console.timeEnd(`      writetime`);
   }
 }
+console.timeEnd(`total`);
