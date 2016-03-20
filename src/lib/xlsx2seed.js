@@ -92,7 +92,11 @@ class Xlsx2SeedSheet {
         const address = XLSX.utils.encode_cell({c: column_index, r: row_index});
         const cell = this.sheet[address];
         const value = XLSX.utils.format_cell(cell);
-        row.push(isNaN(value) ? value : Number(value));
+        const use_value =
+          value == null || !value.length ? null :
+          isNaN(value) ? value :
+          Number(value);
+        row.push(use_value);
       }
     }
     this._data = new Xlsx2SeedData(this.sheet_name, this.column_names, rows);
