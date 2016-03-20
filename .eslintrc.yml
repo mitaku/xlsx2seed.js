@@ -60,7 +60,7 @@ rules:
   operator-linebreak:
     - 2
     - before
-    - overrides: {"?": after, ":": after}
+    - overrides: {"?": after, ":": after, "=": after}
   no-label-var: 2
   no-process-env: 0
   no-irregular-whitespace: 2
