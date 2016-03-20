@@ -209,22 +209,26 @@ class Xlsx2SeedData {
   }
 
   write_as_single_or_separated_yaml(
-    directory, cut_prefix = 0, cut_postfix = 0, name = null, extension = '.yml'
+    directory, cut_prefix = false, cut_postfix = false, name = null, extension = '.yml'
   ) {
-    if (cut_prefix + cut_postfix === 0) {
+    if (cut_prefix === false && cut_postfix === false) {
       return this.write_as_yaml(directory, name, extension);
     } else {
-      return this.write_as_separated_yaml(directory, cut_prefix, cut_postfix, name, extension);
+      return this.write_as_separated_yaml(
+        directory, Number(cut_prefix), Number(cut_postfix), name, extension
+      );
     }
   }
 
   write_as_single_or_separated_yaml_sync(
-    directory, cut_prefix = 0, cut_postfix = 0, name = null, extension = '.yml'
+    directory, cut_prefix = false, cut_postfix = false, name = null, extension = '.yml'
   ) {
-    if (cut_prefix + cut_postfix === 0) {
+    if (cut_prefix === false && cut_postfix === false) {
       this.write_as_yaml_sync(directory, name, extension);
     } else {
-      this.write_as_separated_yaml_sync(directory, cut_prefix, cut_postfix, name, extension);
+      this.write_as_separated_yaml_sync(
+        directory, Number(cut_prefix), Number(cut_postfix), name, extension
+      );
     }
   }
 }

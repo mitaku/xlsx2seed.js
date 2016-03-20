@@ -32,8 +32,8 @@ function sheet_name_subdivide_rule(sheet_name) {
   const result = sheet_name.match(/^(?:(\d+):)?(.+?)(?::(\d+))?$/);
   if (!result) throw new Error(`[${sheet_name}] is wrong sheet name and subdivide rule definition`);
   return {
-    cut_prefix: result[1] ? Number(result[1]) : 0,
-    cut_postfix: result[3] ? Number(result[3]) : 0,
+    cut_prefix: result[1] ? Number(result[1]) : false,
+    cut_postfix: result[3] ? Number(result[3]) : false,
     sheet_name: result[2],
   };
 }
@@ -77,8 +77,9 @@ for (const file of files) {
       console.log(`      warning: id column not found -> skip!`);
       continue;
     }
-    const {cut_prefix, cut_postfix} = subdivide_rules[sheet_name] || {cut_prefix: 0, cut_postfix: 0};
-    if (cut_prefix + cut_postfix !== 0) console.log(`      subdivide: {cut_prefix: ${cut_prefix}, cut_postfix: ${cut_postfix}}`);
+    const {cut_prefix, cut_postfix} = subdivide_rules[sheet_name] || {cut_prefix: false, cut_postfix: false};
+    if (cut_prefix !== false || cut_postfix !== false)
+      console.log(`      subdivide: {cut_prefix: ${Number(cut_prefix)}, cut_postfix: ${Number(cut_postfix)}}`);
     console.log(`      get-start: ${new Date()}`);
     const data = sheet.data;
     // console.log(`      get-end:   ${new Date()}`);
