@@ -7,6 +7,6 @@ coverage
 !.gitignore
 !.travis.yml
 !.codeclimate.yml
-!.eslintrc
+!.eslintrc.yml
 !.npmignore
 !.babelrc

@@ -5,6 +5,6 @@ npm-debug.log
 coverage
 !.travis.yml
 !.codeclimate.yml
-!.eslintrc
+!.eslintrc.yml
 !.npmignore
 !.babelrc

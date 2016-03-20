@@ -51,6 +51,16 @@ $ xlsx2seed
     $ xlsx2seed hoge.xlsx huga.xlsx -S 2:foo,bar:2,1:baz:2
 ```
 
+## Build
+
+```
+git clone ...
+cd xlsx2seed
+npm i
+gulp
+npm i .
+```
+
 ## License
 
 This is released under [MIT License](http://narazaka.net/license/MIT?2015).
