@@ -5,8 +5,11 @@ const $ = (require('gulp-load-plugins'))();
 const isparta = require('isparta');
 
 const files = {
-  src: {
-    js: 'src/**/*.js',
+  bin: {
+    js: 'src/bin/**/*.js',
+  },
+  lib: {
+    js: 'src/lib/**/*.js',
   },
   test: {
     js: 'test/**/*.js',
@@ -28,8 +31,18 @@ const dirs = {
 
 gulp.task('default', ['build']);
 
-gulp.task('js', function() {
-  return gulp.src(files.src.js, {base: dirs.src})
+gulp.task('bin', function() {
+  return gulp.src(files.bin.js, {base: dirs.src})
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.header('#!/usr/bin/env node\n'))
+//    .pipe($.uglify())
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest(dirs.dst));
+});
+
+gulp.task('lib', function() {
+  return gulp.src(files.lib.js, {base: dirs.src})
     .pipe($.sourcemaps.init())
     .pipe($.babel())
     .pipe($.header(
@@ -41,6 +54,8 @@ gulp.task('js', function() {
     .pipe(gulp.dest(dirs.dst));
 });
 
+gulp.task('js', ['lib', 'bin']);
+
 gulp.task('build', ['js', 'test', 'lint', 'doc']);
 
 gulp.task('test', ['test-node']);
@@ -48,7 +63,7 @@ gulp.task('test', ['test-node']);
 gulp.task('test-cli', ['test-node']);
 
 gulp.task('pre-test', function() {
-  return gulp.src(files.src.js)
+  return gulp.src(files.lib.js)
     .pipe($.istanbul({instrumenter: isparta.Instrumenter}))
     .pipe($.istanbul.hookRequire())
     .pipe(gulp.dest('test-tmp'));
@@ -62,7 +77,7 @@ gulp.task('test-node', ['pre-test'], function() {
 
 gulp.task('lint', function() {
   return gulp.src(
-    [files.src.js, files.test.js, files.mock.js, files.conf.js],
+    [files.bin.js, files.lib.js, files.test.js, files.mock.js, files.conf.js],
     {base: '.'}
   )
     .pipe($.eslint({useEslintrc: true}))
@@ -72,7 +87,7 @@ gulp.task('lint', function() {
 
 gulp.task('lint-fix', function() {
   return gulp.src(
-    [files.src.js, files.test.js, files.mock.js, files.conf.js],
+    [files.bin.js, files.lib.js, files.test.js, files.mock.js, files.conf.js],
     {base: '.'}
   )
     .pipe($.eslint({useEslintrc: true, fix: true}))
@@ -92,7 +107,7 @@ gulp.task('doc', ['clean-doc'], function() {
 
 gulp.task('watch', function() {
   gulp.start(['js', 'test-node', 'lint', 'doc']);
-  return $.watch([files.src.js, files.test.js], function() {
+  return $.watch([files.bin.js, files.lib.js, files.test.js], function() {
     return gulp.start(['js', 'test-node', 'lint', 'doc']);
   });
 });
