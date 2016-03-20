@@ -64,3 +64,5 @@ npm i .
 ## License
 
 This is released under [MIT License](http://narazaka.net/license/MIT?2015).
+
+This software is using libraries that is released under [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0).
