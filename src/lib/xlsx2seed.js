@@ -143,7 +143,7 @@ class Xlsx2SeedData {
     for (const key in records) {
       const record = records[key];
       const id = record.id.toString();
-      const cut_id = id.slice(cut_prefix, -cut_postfix);
+      const cut_id = id.slice(cut_prefix, id.length - cut_postfix);
       const cut_key = `data${cut_id}`;
       if (!separated_records[cut_key]) separated_records[cut_key] = {};
       separated_records[cut_key][key] = record;
