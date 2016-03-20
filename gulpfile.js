@@ -71,7 +71,7 @@ gulp.task('pre-test', function() {
 
 gulp.task('test-node', ['pre-test'], function() {
   return gulp.src(files.test.js, {read: false})
-    .pipe($.mocha())
+    .pipe($.mocha({ui: 'mocha-lazy-bdd'}))
     .pipe($.istanbul.writeReports());
 });
 
