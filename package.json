@@ -1,0 +1,48 @@
+{
+  "name": "xlsx2seed",
+  "version": "0.0.1",
+  "description": "xlsx to seed yamls",
+  "main": "./lib/xlsx2seed.js",
+  "scripts": {
+    "test": "gulp test-cli",
+    "codecov": "gulp test-node && cat coverage/lcov.info | codecov"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "fso": "^0.1.1",
+    "js-yaml": "^3.5.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^5.0.0-beta6",
+    "babel-plugin-espower": "^2.0.0",
+    "babel-preset-es2015": "^6.3.13",
+    "bower": "^1.6.5",
+    "codecov.io": "^0.1.6",
+    "espower-babel": "^4.0.1",
+    "estraverse-fb": "^1.3.1",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-clone": "^1.0.0",
+    "gulp-esdoc": "^0.2.0",
+    "gulp-eslint": "^2.0.0",
+    "gulp-header": "^1.7.1",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-load-plugins": "^1.1.0",
+    "gulp-mocha": "^2.1.3",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-watch": "^4.3.5",
+    "isparta": "^4.0.0",
+    "mocha": "^2.3.3",
+    "power-assert": "^1.1.0",
+    "rimraf": "^2.4.3"
+  },
+  "url": "https://github.com/Narazaka/xlsx2seed.js",
+  "author": "Narazaka",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Narazaka/xlsx2seed.js.git"
+  }
+}
