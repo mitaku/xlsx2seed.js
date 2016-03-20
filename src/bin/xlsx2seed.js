@@ -5,11 +5,11 @@ const commander = require('commander');
 const program = commander
   .version(require('../package.json').version)
   .arguments('<files...>')
-  .option('-S,--subdivide [sheet_name1:2,1:sheet_name2:2,2:sheet_name3,...]', 'subdivide rules', (value) => value.split(','), [])
-  .option('-I,--ignore [sheet_name1,sheet_name2,...]', 'ignore sheet names', (value) => value.split(','), [])
-  .option('-O,--only [sheet_name1,sheet_name2:2,...]', 'only sheet names', (value) => value.split(','), [])
-  .option('-i,--input [path]', 'input directory', String, '.')
-  .option('-o,--output [path]', 'output directory', String, '.')
+  .option('-S, --subdivide [sheet_name1:2,1:sheet_name2:2,2:sheet_name3,...]', 'subdivide rules', (value) => value.split(','), [])
+  .option('-I, --ignore [sheet_name1,sheet_name2,...]', 'ignore sheet names', (value) => value.split(','), [])
+  .option('-O, --only [sheet_name1,sheet_name2:2,...]', 'only sheet names', (value) => value.split(','), [])
+  .option('-i, --input [path]', 'input directory', String, '.')
+  .option('-o, --output [path]', 'output directory', String, '.')
   .on('--help', () => {
     console.log('  Examples:');
     console.log('');
