@@ -11,7 +11,8 @@
   "dependencies": {
     "commander": "^2.9.0",
     "fso": "^0.1.1",
-    "js-yaml": "^3.5.5"
+    "js-yaml": "^3.5.5",
+    "xlsx": "^0.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0-beta6",
