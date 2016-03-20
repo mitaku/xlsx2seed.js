@@ -10,7 +10,7 @@
 [![Dependency Status](https://david-dm.org/Narazaka/xlsx2seed.js.svg)](https://david-dm.org/Narazaka/xlsx2seed.js)
 [![devDependency Status](https://david-dm.org/Narazaka/xlsx2seed.js/dev-status.svg)](https://david-dm.org/Narazaka/xlsx2seed.js#info=devDependencies)
 [![Travis Build Status](https://travis-ci.org/Narazaka/xlsx2seed.js.svg)](https://travis-ci.org/Narazaka/xlsx2seed.js)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Narazaka/xlsx2seed-js?svg=true)](https://ci.appveyor.com/project/Narazaka/xlsx2seed-js)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Narazaka/xlsx2seed.js?svg=true)](https://ci.appveyor.com/project/Narazaka/xlsx2seed-js)
 [![codecov.io](https://codecov.io/github/Narazaka/xlsx2seed.js/coverage.svg?branch=master)](https://codecov.io/github/Narazaka/xlsx2seed.js?branch=master)
 [![Code Climate](https://codeclimate.com/github/Narazaka/xlsx2seed.js/badges/gpa.svg)](https://codeclimate.com/github/Narazaka/xlsx2seed.js)
 
