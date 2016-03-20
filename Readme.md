@@ -32,13 +32,13 @@ $ xlsx2seed
 
   Options:
 
-    -h, --help                                                        output usage information
-    -V, --version                                                     output the version number
-    -S,--subdivide [sheet_name1:2,1:sheet_name2:2,2:sheet_name3,...]  subdivide rules
-    -I,--ignore [sheet_name1,sheet_name2,...]                         ignore sheet names
-    -O,--only [sheet_name1,sheet_name2:2,...]                         only sheet names
-    -i,--input [path]                                                 input directory
-    -o,--output [path]                                                output directory
+    -h, --help                                                         output usage information
+    -V, --version                                                      output the version number
+    -S, --subdivide [sheet_name1:2,1:sheet_name2:2,2:sheet_name3,...]  subdivide rules
+    -I, --ignore [sheet_name1,sheet_name2,...]                         ignore sheet names
+    -O, --only [sheet_name1,sheet_name2:2,...]                         only sheet names
+    -i, --input [path]                                                 input directory
+    -o, --output [path]                                                output directory
 
   Examples:
 
