@@ -93,8 +93,10 @@ class Xlsx2SeedSheet {
         const cell = this.sheet[address];
         const value = XLSX.utils.format_cell(cell);
         const use_value =
-          value == null || !value.length ? null :
-          isNaN(value) ? value :
+          value == null || !value.length ? null : // empty cell -> null
+          cell.t === 'n' && value.match(/E\+\d+$/) && !isNaN(value) ? Number(cell.v) : // 1.00+E12 -> use raw value
+          cell.t === 'n' && value.match(/,/) && !isNaN(cell.v) ? Number(cell.v) : // 1,000 -> use raw value
+          isNaN(value) ? value.replace(/\\n/g, "\n").replace(/\r/g, "") : // "\\n" -> "\n" / delete "\r"
           Number(value);
         row.push(use_value);
       }
