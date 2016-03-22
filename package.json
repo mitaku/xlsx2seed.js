@@ -1,6 +1,6 @@
 {
   "name": "xlsx2seed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "xlsx to seed yamls",
   "bin": "./bin/xlsx2seed.js",
   "main": "./lib/xlsx2seed.js",
