@@ -1,4 +1,5 @@
 const path = require('path');
+const jsyaml = require('js-yaml');
 const Xlsx2Seed = require('../lib/xlsx2seed').Xlsx2Seed;
 const commander = require('commander');
 
@@ -10,6 +11,7 @@ const program = commander
   .option('-O, --only [sheet_name1,sheet_name2:2,...]', 'only sheet names', (value) => value.split(','), [])
   .option('-i, --input [path]', 'input directory', String, '.')
   .option('-o, --output [path]', 'output directory', String, '.')
+  .option('-d, --stdout', 'output one sheets to stdout')
   .on('--help', () => {
     console.log('  Examples:');
     console.log('');
@@ -55,36 +57,54 @@ for (const sheet of program.subdivide.map((sheet_name) => sheet_name_subdivide_r
   subdivide_rules[sheet.sheet_name] = sheet;
 }
 
-console.log(`output-directory: ${program.output}`);
-console.time(`total`);
+const _console = {
+  log: function log(...args) {
+    if (!program.stdout) console.log(...args);
+  },
+  time: function log(...args) {
+    if (!program.stdout) console.time(...args);
+  },
+  timeEnd: function log(...args) {
+    if (!program.stdout) console.timeEnd(...args);
+  },
+};
+
+_console.log(`output-directory: ${program.output}`);
+_console.time(`total`);
 for (const file of files) {
   const file_path = path.isAbsolute(file) ? file : path.join(program.input, file);
-  console.log(`${file}:`);
-  console.log(`  full-path: ${file_path}`);
-  console.time(`  parsetime`);
+  _console.log(`${file}:`);
+  _console.log(`  full-path: ${file_path}`);
+  _console.time(`  parsetime`);
   const xlsx2seed = new Xlsx2Seed(file_path);
-  console.timeEnd(`  parsetime`);
+  _console.timeEnd(`  parsetime`);
 
-  console.log(`  sheets:`);
+  _console.log(`  sheets:`);
   for (const sheet_name of xlsx2seed.sheet_names) {
     if (only_sheets && !only_sheets[sheet_name]) continue;
-    console.log(`    ${sheet_name}:`);
+    _console.log(`    ${sheet_name}:`);
     if (ignore_sheets[sheet_name]) {
-      console.log(`      ignore: skip`);
+      _console.log(`      ignore: skip`);
       continue;
     }
     const sheet = xlsx2seed.sheet(sheet_name);
     if (!sheet.has_id_column()) {
-      console.log(`      warning: id column not found -> skip!`);
+      _console.log(`      warning: id column not found -> skip!`);
       continue;
     }
     const {cut_prefix, cut_postfix} = subdivide_rules[sheet_name] || {cut_prefix: false, cut_postfix: false};
     if (cut_prefix !== false || cut_postfix !== false)
-      console.log(`      subdivide: {cut_prefix: ${Number(cut_prefix)}, cut_postfix: ${Number(cut_postfix)}}`);
-    console.time(`      writetime`);
+      _console.log(`      subdivide: {cut_prefix: ${Number(cut_prefix)}, cut_postfix: ${Number(cut_postfix)}}`);
+    _console.time(`      writetime`);
     const data = sheet.data;
-    data.write_as_single_or_separated_yaml_sync(program.output, cut_prefix, cut_postfix);
-    console.timeEnd(`      writetime`);
+    if (program.stdout) {
+      const output_data = {};
+      output_data[sheet_name] = data.as_key_based();
+      console.log(jsyaml.dump(output_data));
+    } else {
+      data.write_as_single_or_separated_yaml_sync(program.output, cut_prefix, cut_postfix);
+    }
+    _console.timeEnd(`      writetime`);
   }
 }
-console.timeEnd(`total`);
+_console.timeEnd(`total`);
