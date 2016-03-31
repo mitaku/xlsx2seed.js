@@ -39,6 +39,7 @@ $ xlsx2seed
     -O, --only [sheet_name1,sheet_name2:2,...]                         only sheet names
     -i, --input [path]                                                 input directory
     -o, --output [path]                                                output directory
+    -d, --stdout                                                       output one sheets to stdout
 
   Examples:
 
