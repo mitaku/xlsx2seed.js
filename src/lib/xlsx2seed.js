@@ -13,7 +13,7 @@ class Xlsx2Seed {
   get sheet_names() {
     return this._sheet_names
       || (this._sheet_names = this.book.SheetNames.filter(
-        (sheet_name) => sheet_name.match(/^[A-Za-z0-9_]+$/))
+        (sheet_name) => sheet_name.match(/^[A-Za-z0-9_.]+$/))
       );
   }
 
