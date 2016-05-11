@@ -40,6 +40,8 @@ $ xlsx2seed
     -i, --input [path]                                                 input directory
     -o, --output [path]                                                output directory
     -d, --stdout                                                       output one sheets to stdout
+    -c, --config [path]                                                config file (default: xlsx2seed.yml)
+    -C, --config-content [yaml string]                                 config content
 
   Examples:
 
