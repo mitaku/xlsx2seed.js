@@ -51,6 +51,9 @@ $ xlsx2seed
 
     # foo subdivide prefix 1 / bar subdivide postfix 2 / baz subdivide prefix 1 and postfix 2
     $ xlsx2seed hoge.xlsx huga.xlsx -S 2:foo,bar:2,1:baz:2
+
+    # column names row is 3 (2 in zero origin)
+    $ xlsx2seed hoge.xlsx huga.xlsx -C "column_names_row: 2"
 ```
 
 ## Build
