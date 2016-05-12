@@ -83,7 +83,8 @@ class Xlsx2SeedSheet {
       const address = XLSX.utils.encode_cell({c: column_index, r: this.column_names_row});
       const cell = this.sheet[address];
       const value = XLSX.utils.format_cell(cell);
-      if (value.length && value !== 'dummy' && value !== 'VERSION') {
+      if (!value.length) break;
+      if (value !== 'dummy' && value !== 'VERSION') {
         column_names.push(value);
         column_indexes.push(column_index);
       }
