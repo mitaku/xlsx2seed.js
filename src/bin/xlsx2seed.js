@@ -51,7 +51,7 @@ function get_config(program) {
       } else if (fs.existsSync(default_config_file)) {
         return jsyaml.load(fs.readFileSync(default_config_file, {encoding: 'utf8'}));
       } else {
-        return;
+        return {};
       }
     }
   } catch(error) {
