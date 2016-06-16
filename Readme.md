@@ -89,7 +89,7 @@ Now there is no ignored columns. (It was "dummy" and "VERSION".)
 
 #### BREAKING CHANGE: Xlsx2SeedSheet::data API
 
-Now Xlsx2SeedSheet::data() is a method. (It was a getter property, Xlsx2SeedSeet::data.)
+Now Xlsx2SeedSheet::data() is a method. (It was a getter property, Xlsx2SeedSheet::data.)
 
 ## License
 
