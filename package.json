@@ -12,6 +12,7 @@
     "commander": "^2.9.0",
     "fso": "^0.1.1",
     "js-yaml": "^3.5.5",
+    "semver": "^5.1.0",
     "xlsx": "^0.8.0"
   },
   "devDependencies": {

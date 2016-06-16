@@ -15,6 +15,9 @@ const program = commander
   .option('-i, --input [path]', 'input directory', String, '.')
   .option('-o, --output [path]', 'output directory', String, '.')
   .option('-d, --stdout', 'output one sheets to stdout')
+  .option('-R, --require-version [version]', 'require version (with version column)', String, '')
+  .option('-v, --version-column [column_name]', 'version column', String, '')
+  .option('-n, --ignore-columns [column_name1,column_name2,...]', 'ignore columns', (value) => value.split(','), [])
   .option('-c, --config [path]', 'config file (default: xlsx2seed.yml)', String, '')
   .option('-C, --config-content [yaml string]', 'config content', String, '')
   .on('--help', () => {
@@ -48,7 +51,7 @@ function get_config(program) {
       } else if (fs.existsSync(default_config_file)) {
         return jsyaml.load(fs.readFileSync(default_config_file, {encoding: 'utf8'}));
       } else {
-        return;
+        return {};
       }
     }
   } catch(error) {
@@ -58,6 +61,8 @@ function get_config(program) {
   }
 }
 const config = get_config(program);
+if (program.versionColumn) config.version_column = program.versionColumn;
+if (program.ignoreColumns) config.ignore_columns = program.ignoreColumns;
 
 function sheet_name_subdivide_rule(sheet_name) {
   const result = sheet_name.match(/^(?:(\d+):)?(.+?)(?::(\d+))?$/);
@@ -125,7 +130,7 @@ for (const file of files) {
     if (cut_prefix !== false || cut_postfix !== false)
       _console.log(`      subdivide: {cut_prefix: ${Number(cut_prefix)}, cut_postfix: ${Number(cut_postfix)}}`);
     _console.time(`      writetime`);
-    const data = sheet.data;
+    const data = sheet.data(program.requireVersion);
     if (program.stdout) {
       const output_data = {};
       output_data[sheet_name] = data.as_key_based();
