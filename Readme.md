@@ -71,6 +71,26 @@ gulp
 npm i .
 ```
 
+## Changelog
+
+### v1.0.0
+
+#### feature: require version
+
+`-R -v` option.
+
+#### feature: ignore columns
+
+`-n` option.
+
+#### BREAKING CHANGE: default ignored columns
+
+Now there is no ignored columns. (It was "dummy" and "VERSION".)
+
+#### BREAKING CHANGE: Xlsx2SeedSheet::data API
+
+Now Xlsx2SeedSheet::data() is a method. (It was a getter property, Xlsx2Seed::data.)
+
 ## License
 
 This is released under [MIT License](http://narazaka.net/license/MIT?2016).
