@@ -40,6 +40,9 @@ $ xlsx2seed
     -i, --input [path]                                                 input directory
     -o, --output [path]                                                output directory
     -d, --stdout                                                       output one sheets to stdout
+    -R, --require-version [version]                                    require version (with version column)
+    -v, --version-column [column_name]                                 version column
+    -n, --ignore-columns [column_name1,column_name2,...]               ignore columns
     -c, --config [path]                                                config file (default: xlsx2seed.yml)
     -C, --config-content [yaml string]                                 config content
 
