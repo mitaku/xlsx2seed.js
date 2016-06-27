@@ -20,7 +20,7 @@ xlsx to seed yamls
 
 npm:
 ```
-npm install xlsx2seed
+npm install -g xlsx2seed
 ```
 
 ## Usage
