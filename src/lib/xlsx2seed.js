@@ -47,6 +47,7 @@ class Xlsx2SeedSheet {
     this._ignore_columns = ignore_columns;
     this._version_column = version_column;
     this._data = {};
+    this._row_indexes = {};
   }
 
   get sheet_name() {
@@ -100,6 +101,11 @@ class Xlsx2SeedSheet {
     return this._version_column_index;
   }
 
+  row_indexes(require_version = '') {
+    if (!this._row_indexes[require_version]) this._get_data(require_version);
+    return this._row_indexes[require_version];
+  }
+
   _set_column_info() {
     const column_names = [];
     const column_indexes = [];
@@ -123,12 +129,21 @@ class Xlsx2SeedSheet {
     return this.column_names.indexOf('id') !== -1;
   }
 
+  sheet_column_index(column_name) {
+    return this.column_indexes[this.column_names.indexOf(column_name)];
+  }
+
+  sheet_row_index(row_index, require_version = '') {
+    return this.row_indexes(require_version)[row_index];
+  }
+
   data(require_version = '') {
     if (!this._data[require_version]) this._get_data(require_version);
     return this._data[require_version];
   }
 
   _get_data(require_version = '') {
+    const row_indexes = this._row_indexes[require_version] = [];
     const rows = [];
     const version_column_index = this.version_column_index;
     const require_version_range = `>= ${require_version}`;
@@ -147,6 +162,7 @@ class Xlsx2SeedSheet {
       }
       const row = [];
       rows.push(row);
+      row_indexes.push(row_index);
       for (const column_index of this.column_indexes) {
         const address = XLSX.utils.encode_cell({c: column_index, r: row_index});
         const cell = this.sheet[address];
