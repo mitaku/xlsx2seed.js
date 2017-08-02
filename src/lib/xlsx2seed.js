@@ -146,7 +146,7 @@ class Xlsx2SeedSheet {
     const row_indexes = this._row_indexes[require_version] = [];
     const rows = [];
     const version_column_index = this.version_column_index;
-    const require_version_range = `>= ${require_version}`;
+    const require_version_range = `<= ${require_version}`;
     for (let row_index = this.data_start_row; row_index <= this.max_row_index; ++row_index) {
       if (version_column_index && require_version) { // version check
         const address = XLSX.utils.encode_cell({c: version_column_index, r: row_index});
